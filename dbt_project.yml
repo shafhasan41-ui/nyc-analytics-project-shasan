@@ -1,8 +1,7 @@
-
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'my_new_project'
+name: 'nyc_analytics'
 version: '1.0.0'
 config-version: 2
 
@@ -36,7 +35,23 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  my_new_project:
-    # Applies to all files under models/example/
-    example:
-      +materialized: table
+ nyc_analytics:
+   +materialized: table
+
+   assignment_work:
+     staging:
+       +materialized: table
+       +schema: nyc_homework_staging
+
+     marts:
+       +materialized: table
+       +schema: nyc_homework_warehouse_marts
+
+       conformed:
+         +materialized: table
+
+       dob_job_filings:
+         +materialized: table
+
+       dot_311:
+         +materialized: table
