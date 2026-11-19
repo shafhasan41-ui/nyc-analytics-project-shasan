@@ -1,4 +1,4 @@
--- Staging model for DOB NOW job filings (minimum cleaning)
+-- Staging model for DOB NOW job filings 
 
 WITH source AS (
    SELECT * FROM {{ source('raw', 'source_nyc_dob_job_apps') }}
@@ -6,7 +6,7 @@ WITH source AS (
 
 cleaned AS (
    SELECT
-       -- Keep every other column as is; transform the ones below
+       
        * EXCEPT (
            job_filing_number,
            filing_date,
@@ -26,12 +26,12 @@ cleaned AS (
        CAST(approved_date AS TIMESTAMP) AS approved_date,
        CAST(signoff_date AS TIMESTAMP) AS signoff_date,
 
-       -- Rename postcode to zip so it matches the 311 data
+       
        CAST(postcode AS STRING) AS zip
 
    FROM source
 
-   -- Filter
+   
    WHERE job_filing_number IS NOT NULL
 )
 
